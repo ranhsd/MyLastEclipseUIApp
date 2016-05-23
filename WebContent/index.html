@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+		
+		<script>
+			//var serviceUrl = "/mypath/myservice";       //url when running on the ABAP system
+			//var serviceUrl = "proxy/mypath/myservice";  //url when running locally in Eclipse
+			var serviceUrl = getServiceUrl("/mypath/myservice");
+			function getServiceUrl(sServiceUrl) {
+			  //for local testing prefix with proxy
+			  //if you and your team use a special host name or IP like 127.0.0.1 for localhost please adapt the if statement below 
+			  if (window.location.hostname == "localhost") {
+			      return "proxy" + sServiceUrl;
+			  } else {
+			      return sServiceUrl;
+			  }
+			}
+		</script>		
+
+		<script src="resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
+
+		<script>
+				sap.ui.localResources("mylasteclipseui5app");
+				var app = new sap.m.App({initialPage:"idSalesOrders1"});
+				var page = sap.ui.view({id:"idSalesOrders1", viewName:"mylasteclipseui5app.SalesOrders", type:sap.ui.core.mvc.ViewType.XML});
+				app.addPage(page);
+				app.placeAt("content");
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>
